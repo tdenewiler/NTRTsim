@@ -38,7 +38,7 @@ jobs:
           python -m pip install --upgrade wheel
 
       - name: Statick
-        uses: sscpac/statick-action@main
+        uses: sscpac/statick-action@@v0.0.2
         with:
           check: false
           config: custom-config.yaml
