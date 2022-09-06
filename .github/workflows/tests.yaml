@@ -40,7 +40,7 @@ jobs:
       - name: Statick
         uses: sscpac/statick-action@v0.0.2
         with:
-          check: false
+          check: true
           config: custom-config.yaml
           profile: custom-profile.yaml
           user_paths: statick-config
