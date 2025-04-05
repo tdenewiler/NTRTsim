@@ -12,24 +12,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        python-version: ['3.10']
+        os: [ubuntu-24.04]
+        python-version: ['3.13']
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
-      - uses: actions/cache@v1
-        if: startsWith(runner.os, 'Linux')
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -38,9 +31,8 @@ jobs:
           python -m pip install --upgrade wheel
 
       - name: Statick
-        uses: sscpac/statick-action@v0.0.2
+        uses: sscpac/statick-action@v0.9.2
         with:
           check: false
-          config: custom-config.yaml
-          profile: custom-profile.yaml
+          level: custom
           user_paths: statick-config
